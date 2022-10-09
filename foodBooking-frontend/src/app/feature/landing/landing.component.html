@@ -1,0 +1,31 @@
+<div id="container" [ngStyle]="{ 'background-image': 'url(' + imageURL + ')' }">
+  <div class="header">
+    <div style="display: flex; justify-content: space-between; padding: 12px">
+      <!-- <p style="visibility: hidden">FOOD BOOKING</p> -->
+      <p style="font-size: 26px; padding-top: 9px; color: white">
+        FOOD BOOKING
+      </p>
+      <section>
+        <button mat-button [routerLink]="'login'" class="loginButton noround">
+          Sign In
+        </button>
+        <button [routerLink]="'signup'" mat-button class="loginButton noround">
+          Sign Up
+        </button>
+      </section>
+    </div>
+  </div>
+  <section id="sectionDiv">
+    <h1>Food near me</h1>
+    <h3>Order fresh, ready foods online</h3>
+
+    <button
+      mat-button
+      [routerLink]="'login'"
+      class="loginButton noround"
+      style="width: 250px"
+    >
+      Sign In
+    </button>
+  </section>
+</div>

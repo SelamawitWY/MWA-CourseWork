@@ -1,0 +1,122 @@
+<div id="container" style="background-repeat: unset">
+  <mat-card id="homePage">
+    <mat-card-content style="flex-direction: column">
+      <div style="display: flex">
+        <button
+          mat-button
+          class="loginButton noround"
+          style="background: goldenrod"
+        >
+          Foods
+        </button>
+        <button
+          [routerLink]="'/restaurants/extras'"
+          mat-button
+          class="loginButton noround"
+        >
+          Extras
+        </button>
+        <button
+          [routerLink]="'/restaurants/orders'"
+          mat-button
+          class="loginButton noround"
+        >
+          Orders
+        </button>
+      </div>
+
+      <section style="background: rgb(41, 39, 49, 0.9); border-radius: 16px">
+        <div class="addFoodButton">
+          <button
+            [routerLink]="'add'"
+            mat-button
+            class="loginButton noround"
+            style="width: 215px"
+          >
+            <mat-icon>add</mat-icon>
+            Publish Food
+          </button>
+        </div>
+
+        <div
+          id="restForm"
+          style="
+            height: 98vh;
+            padding-top: 6px;
+            overflow-x: hidden;
+            overflow-y: auto;
+          "
+        >
+          <mat-card *ngFor="let food of foods" class="foodCard">
+            <div style="display: flex">
+              <div style="width: 70%; display: flex">
+                <section>
+                  <mat-card-header>
+                    <mat-card-title style="justify-content: left">{{
+                      food.name
+                    }}</mat-card-title>
+                    <mat-card-subtitle>{{
+                      food.description
+                    }}</mat-card-subtitle>
+                  </mat-card-header>
+                  <img class="matImage" [src]="food.imageUrl" alt="" />
+                  <mat-card-content
+                    class="recipeDiv"
+                    style="
+                      flex-direction: column;
+                      align-items: baseline;
+                      min-width: max-content;
+                    "
+                  >
+                  </mat-card-content>
+                </section>
+
+                <mat-card-content class="recipeDiv">
+                  <p style="font-style: italic; margin: 0px">
+                    Stock : {{ food.totalQuantity }}
+                  </p>
+                  <p style="font-style: italic; margin: 0px">
+                    Remaining : {{ food.remainingQuantity }}
+                  </p>
+                  <mat-divider
+                    style="
+                      width: 100%;
+                      margin: 3px;
+                      background: rgb(133, 152, 111);
+                    "
+                  ></mat-divider>
+                  <p style="font-style: italic; margin: 0px">
+                    Price : $ {{ food.price }}
+                  </p>
+                  <p style="font-style: italic; margin: 0px">
+                    Extras : {{ getExtras(food) }}
+                  </p>
+                  <p style="font-style: italic; margin: 0px">
+                    Recipes: {{ food.recipe.join(", ") }}
+                  </p>
+                </mat-card-content>
+              </div>
+
+              <mat-card-actions class="actionDiv">
+                <button
+                  mat-button
+                  class="loginButton actionButton"
+                  (click)="edit(food)"
+                >
+                  <mat-icon>edit</mat-icon> Edit
+                </button>
+                <button
+                  mat-button
+                  class="loginButton actionButton"
+                  (click)="delete(food)"
+                >
+                  <mat-icon>delete</mat-icon>Delete
+                </button>
+              </mat-card-actions>
+            </div>
+          </mat-card>
+        </div>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>

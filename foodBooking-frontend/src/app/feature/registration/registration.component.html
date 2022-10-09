@@ -1,0 +1,143 @@
+<div id="container">
+  <mat-card id="homePage">
+    <mat-card-title style="font-size: 54px; margin-bottom: 54px"
+      >Registration</mat-card-title
+    >
+
+    <div
+      class="mat-card-content"
+      *ngIf="!isUser || !isRestaurant"
+      id="buttonContainer"
+      [ngStyle]="
+        !(isUser || isRestaurant) ? { display: 'block' } : { display: 'none' }
+      "
+    >
+      <div
+        *ngIf="!(isUser || isRestaurant)"
+        style="display: flex; flex-direction: column"
+      >
+        <button
+          (click)="isUser = !isUser"
+          mat-button
+          class="loginButton"
+          style="margin-bottom: 32px"
+        >
+          Setup Customer Account
+        </button>
+        <button [routerLink]="'restaurants'" mat-button class="loginButton">
+          Setup Restaurant Account
+        </button>
+      </div>
+    </div>
+
+    <mat-card-content *ngIf="isUser">
+      <section>
+        <form
+          id="loginForm"
+          [formGroup]="userSignupForm"
+          (ngSubmit)="userSignup()"
+        >
+          <p>
+            <mat-form-field>
+              <input
+                class="matInput"
+                type="text"
+                matInput
+                placeholder="Full Name"
+                formControlName="fullname"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && userSignupForm.get('fullname')?.errors
+                }"
+              />
+            </mat-form-field>
+            <span
+              *ngIf="submitted && userSignupForm.get('fullname')?.errors"
+              class="error"
+            >
+              Full Name is required
+            </span>
+          </p>
+
+          <p>
+            <mat-form-field>
+              <input
+                class="matInput"
+                type="text"
+                matInput
+                mask="(000) 000-0000"
+                placeholder="Phone number"
+                formControlName="phonenumber"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && userSignupForm.get('phonenumber')?.errors
+                }"
+              />
+            </mat-form-field>
+            <span
+              *ngIf="submitted && userSignupForm.get('phonenumber')?.errors"
+              class="error"
+            >
+              Phone number is required
+            </span>
+          </p>
+
+          <p>
+            <mat-form-field>
+              <input
+                class="matInput"
+                matInput
+                autocomplete="off"
+                placeholder="Email"
+                formControlName="email"
+                [ngClass]="{
+                  'is-invalid': submitted && userSignupForm.get('email')?.errors
+                }"
+              />
+            </mat-form-field>
+            <span
+              *ngIf="submitted && userSignupForm.get('email')?.errors"
+              class="error"
+            >
+              Email is required
+            </span>
+          </p>
+
+          <p>
+            <mat-form-field>
+              <input
+                class="matInput"
+                type="password"
+                autocomplete="off"
+                matInput
+                placeholder="Password"
+                formControlName="password"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && userSignupForm.get('password')?.errors
+                }"
+              />
+            </mat-form-field>
+            <span
+              *ngIf="submitted && userSignupForm.get('password')?.errors"
+              class="error"
+            >
+              Password length should be greater than 8 and less than 32
+            </span>
+          </p>
+
+          <div class="button">
+            <button
+              type="submit"
+              [disabled]="submitted && !userSignupForm.valid"
+              mat-button
+              class="loginButton"
+            >
+              Sign Up
+            </button>
+          </div>
+        </form>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>

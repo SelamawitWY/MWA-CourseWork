@@ -1,0 +1,54 @@
+#container {
+  background-image: url("../../../assets/homePage.jpeg");
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+}
+
+:host ::ng-deep mat-card {
+  background: none;
+}
+
+#loginForm {
+  background: rgb(41, 39, 49, 0.9);
+  border-radius: 16px;
+  padding: 54px;
+}
+.loginButton {
+  width: 332px;
+  background: rgb(134, 152, 111);
+  color: white;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.mat-form-field {
+  width: 100%;
+  /* min-width: 300px; */
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  padding-bottom: 6px;
+  color: red;
+}
+
+.matInput {
+  padding: 16px;
+  width: 97%;
+  padding-right: 0px;
+}
+.button {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-focused .mat-form-field-label {
+  color: green !important;
+  font-size: 20px;
+}

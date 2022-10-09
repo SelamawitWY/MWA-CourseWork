@@ -1,0 +1,157 @@
+<div id="container" style="background-repeat: unset">
+  <mat-card id="homePage">
+    <mat-card-content style="flex-direction: column">
+      <div style="display: flex">
+        <button
+          mat-button
+          class="loginButton noround"
+          style="background: goldenrod"
+        >
+          Foods
+        </button>
+        <button
+          [routerLink]="'../users/orders'"
+          mat-button
+          class="loginButton noround"
+        >
+          Orders
+        </button>
+      </div>
+
+      <section style="background: rgb(41, 39, 49, 0.9); border-radius: 16px">
+        <div
+          id="restForm"
+          style="
+            height: 98vh;
+            padding-top: 6px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 48px;
+          "
+        >
+          <div *ngFor="let restaurant of restaurants">
+            <mat-card *ngFor="let food of restaurant.foods" class="foodCard">
+              <div style="display: flex; align-items: end">
+                <div style="width: 70%; display: flex; align-items: flex-end">
+                  <section>
+                    <mat-card-header>
+                      <mat-card-title style="justify-content: left">{{
+                        food.name
+                      }}</mat-card-title>
+                      <mat-card-subtitle>{{
+                        food.description
+                      }}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img class="matImage" [src]="food.imageUrl" alt="" />
+                    <!-- <mat-card-content>
+
+                    </mat-card-content> -->
+                  </section>
+
+                  <mat-card-content
+                    class="recipeDiv"
+                    style="
+                      flex-direction: column;
+                      align-items: baseline;
+                      min-width: max-content;
+                    "
+                  >
+                    <p style="font-style: italic; margin: 0px">
+                      Restaurant : {{ restaurant.name }}
+                    </p>
+                    <p style="font-style: italic; margin: 0px">
+                      Pick Up : {{ restaurant.workingHourFrom }} -
+                      {{ restaurant.workingHourTo }}
+                    </p>
+                    <mat-divider
+                      style="
+                        width: 100%;
+                        margin: 3px;
+                        background: rgb(133, 152, 111);
+                      "
+                    ></mat-divider>
+                    <p style="font-style: italic; margin: 0px">
+                      Price : $ {{ food.price }}
+                    </p>
+                    <p style="font-style: italic; margin: 0px">
+                      Remaining : {{ food.remainingQuantity }}
+                    </p>
+                    <p style="font-style: italic; margin: 0px">
+                      Recipes : {{ food.recipe.join(", ") }}
+                    </p>
+                    <p style="font-style: italic; margin: 0px">
+                      Extras : {{ getExtras(food) }}
+                    </p>
+                  </mat-card-content>
+                </div>
+
+                <form
+                  id="restForm"
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                  [formGroup]="orderForm"
+                >
+                  <p>
+                    <mat-form-field>
+                      <input
+                        class="matInput"
+                        type="number"
+                        [min]="1"
+                        matInput
+                        thousandSeparator=","
+                        placeholder="Quantity"
+                        formControlName="quantity"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted && orderForm.get('quantity')?.errors
+                        }"
+                      />
+                    </mat-form-field>
+                    <span
+                      *ngIf="submitted && orderForm.get('quantity')?.errors"
+                      class="error"
+                    >
+                      Quantity is required
+                    </span>
+                  </p>
+
+                  <p>
+                    <mat-form-field>
+                      <mat-select
+                        placeholder="Select extras"
+                        formControlName="extras"
+                        class="matInput"
+                        type="text"
+                        matInput
+                        [(value)]="selectedExtras"
+                        multiple
+                      >
+                        <mat-option
+                          *ngFor="let extra of food.extras"
+                          [value]="extra"
+                          >{{ extra.name }}</mat-option
+                        >
+                      </mat-select>
+                    </mat-form-field>
+                  </p>
+
+                  <button
+                    mat-button
+                    class="loginButton actionButton"
+                    (click)="bookFood(restaurant, food)"
+                  >
+                    Order
+                  </button>
+                </form>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>

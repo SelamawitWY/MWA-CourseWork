@@ -1,0 +1,72 @@
+#container {
+  background-image: url("../../../assets/homePage.jpeg");
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 32px;
+  /* height: 200px; */
+  /* border: 3px solid green; */
+}
+
+#buttonContainer {
+  background: rgb(41, 39, 49, 0.9);
+  border-radius: 16px;
+  padding: 32px;
+}
+
+:host ::ng-deep mat-card {
+  background: none;
+}
+
+:host ::ng-deep mat-input-element mat-form-field-autofill-control {
+  background: none;
+}
+.matInput {
+  padding: 16px;
+  width: 97%;
+  padding-right: 0px;
+}
+#loginForm,
+#restForm {
+  background: rgb(41, 39, 49, 0.9);
+  border-radius: 16px;
+  padding: 54px;
+  width: 100%;
+}
+.loginButton {
+  width: 332px;
+  background: rgb(134, 152, 111);
+  color: white;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  padding-bottom: 6px;
+  color: red;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-focused .mat-form-field-label {
+  color: green !important;
+  font-size: 20px;
+}

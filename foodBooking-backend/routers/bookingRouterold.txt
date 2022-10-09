@@ -1,0 +1,13 @@
+const express = require("express");
+const router = express.Router();
+const {
+  addReservation,
+  cancelReservation,
+  completeReservation,
+} = require("../controllers/bookingController");
+
+router.post("/", express.json(), addReservation);
+router.post("/cancel", express.json(), cancelReservation);
+router.post("/complete", express.json(), completeReservation);
+
+module.exports = router;

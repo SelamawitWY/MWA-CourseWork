@@ -1,0 +1,50 @@
+#container {
+  background-image: url("../assets/homePage.jpeg");
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+}
+
+:host ::ng-deep mat-card {
+  background: none;
+}
+
+#loginForm {
+  background: saddlebrown;
+  padding: 54px;
+}
+.loginButton {
+  width: 332px;
+  background: bisque;
+  color: saddlebrown;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  padding: 16px;
+  width: 300px;
+  color: white;
+  background-color: red;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mat-focused .mat-form-field-label {
+  color: green !important;
+  font-size: 20px;
+}

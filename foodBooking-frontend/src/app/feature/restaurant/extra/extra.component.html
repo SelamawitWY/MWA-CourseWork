@@ -1,0 +1,140 @@
+<div id="container">
+  <mat-card id="homePage">
+    <mat-card-content style="flex-direction: column">
+      <div style="display: flex">
+        <button
+          mat-button
+          [routerLink]="'/restaurants'"
+          class="loginButton noround"
+        >
+          Foods
+        </button>
+        <button
+          mat-button
+          class="loginButton noround"
+          style="background: goldenrod"
+          [routerLink]="'/restaurants/extras'"
+        >
+          Extras
+        </button>
+        <button
+          [routerLink]="'/restaurants/orders'"
+          mat-button
+          class="loginButton noround"
+        >
+          Orders
+        </button>
+      </div>
+      <section style="background: rgb(41, 39, 49, 0.9); border-radius: 16px">
+        <form id="restForm" [formGroup]="extraForm" (ngSubmit)="submit()">
+          <mat-card-title style="font-size: 24px; justify-content: left"
+            >Add Extra</mat-card-title
+          >
+          <mat-divider
+            style="margin-bottom: 36px; margin-top: 32px"
+          ></mat-divider>
+
+          <div>
+            <p>
+              <mat-form-field>
+                <input
+                  class="matInput"
+                  type="text"
+                  matInput
+                  placeholder="Name"
+                  formControlName="name"
+                  [ngClass]="{
+                    'is-invalid': submitted && extraForm.get('name')?.errors
+                  }"
+                />
+              </mat-form-field>
+              <span
+                *ngIf="submitted && extraForm.get('name')?.errors"
+                class="error"
+              >
+                Name is required
+              </span>
+            </p>
+            <p>
+              <mat-form-field>
+                <input
+                  class="matInput"
+                  type="text"
+                  matInput
+                  prefix="$ "
+                  mask="separator.2"
+                  thousandSeparator=","
+                  placeholder="Price"
+                  formControlName="price"
+                  [ngClass]="{
+                    'is-invalid': submitted && extraForm.get('price')?.errors
+                  }"
+                />
+              </mat-form-field>
+              <span
+                *ngIf="submitted && extraForm.get('price')?.errors"
+                class="error"
+              >
+                Price is required
+              </span>
+            </p>
+
+            <p>
+              <mat-form-field>
+                <mat-label>Image</mat-label>
+                <mat-toolbar style="background: unset; padding-left: 0px">
+                  <input
+                    style="padding-top: 24px"
+                    id="fileuploader"
+                    type="file"
+                    accept="image/*"
+                    (change)="onFileChange($event)"
+                  />
+                </mat-toolbar>
+
+                <input style="display: none" id="fileuploader" matInput />
+                <img
+                  alt=""
+                  [src]="imageSrc"
+                  *ngIf="imageSrc"
+                  style="height: 200px; width: 250px"
+                />
+              </mat-form-field>
+              <span
+                *ngIf="
+                  (submitted && extraForm.get('image')?.errors) ||
+                  (submitted && !imageSrc)
+                "
+                class="error"
+              >
+                Image is required
+              </span>
+            </p>
+          </div>
+
+          <div class="button">
+            <button
+              [routerLink]="'..'"
+              type="button"
+              mat-button
+              class="loginButton"
+              style="background: white; color: black; margin-right: 36px"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              [disabled]="
+                (submitted && !extraForm.valid) || (submitted && !imageSrc)
+              "
+              mat-button
+              class="loginButton"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>

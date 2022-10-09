@@ -1,0 +1,259 @@
+<div id="container">
+  <mat-card id="homePage">
+    <mat-card-content style="flex-direction: column">
+      <div style="display: flex">
+        <button
+          mat-button
+          class="loginButton noround"
+          style="background: goldenrod"
+        >
+          Foods
+        </button>
+        <button
+          [routerLink]="'/restaurants/extras'"
+          mat-button
+          class="loginButton noround"
+        >
+          Extras
+        </button>
+        <button
+          [routerLink]="'/restaurants/orders'"
+          mat-button
+          class="loginButton noround"
+        >
+          Orders
+        </button>
+      </div>
+      <section style="background: rgb(41, 39, 49, 0.9); border-radius: 16px">
+        <form id="restForm" [formGroup]="foodForm" (ngSubmit)="submit()">
+          <mat-card-title style="font-size: 24px; justify-content: left"
+            >Publish Food</mat-card-title
+          >
+          <mat-divider
+            style="margin-bottom: 36px; margin-top: 32px"
+          ></mat-divider>
+          <div style="display: flex; justify-content: space-between">
+            <div style="width: 45%">
+              <p>
+                <mat-form-field>
+                  <input
+                    class="matInput"
+                    type="text"
+                    matInput
+                    placeholder="Food Name"
+                    formControlName="name"
+                    [ngClass]="{
+                      'is-invalid': submitted && foodForm.get('name')?.errors
+                    }"
+                  />
+                </mat-form-field>
+                <span
+                  *ngIf="submitted && foodForm.get('name')?.errors"
+                  class="error"
+                >
+                  Food Name is required
+                </span>
+              </p>
+              <p>
+                <mat-form-field>
+                  <input
+                    class="matInput"
+                    type="text"
+                    matInput
+                    placeholder="Small Description"
+                    formControlName="description"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && foodForm.get('description')?.errors
+                    }"
+                  />
+                </mat-form-field>
+                <span
+                  *ngIf="submitted && foodForm.get('description')?.errors"
+                  class="error"
+                >
+                  Description is required
+                </span>
+              </p>
+
+              <p>
+                <mat-form-field>
+                  <input
+                    class="matInput"
+                    type="text"
+                    matInput
+                    prefix="$ "
+                    mask="separator.2"
+                    thousandSeparator=","
+                    placeholder="Price"
+                    formControlName="price"
+                    [ngClass]="{
+                      'is-invalid': submitted && foodForm.get('price')?.errors
+                    }"
+                  />
+                </mat-form-field>
+                <span
+                  *ngIf="submitted && foodForm.get('price')?.errors"
+                  class="error"
+                >
+                  Price is required
+                </span>
+              </p>
+
+              <p>
+                <mat-form-field>
+                  <mat-chip-list #chipList aria-label="Fruit selection">
+                    <mat-chip
+                      *ngFor="let recipe of recipes"
+                      (removed)="remove(recipe)"
+                    >
+                      {{ recipe?.name }}
+                      <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </mat-chip>
+                    <input
+                      class="matInput"
+                      formControlName="recipe"
+                      placeholder="Add recipe..."
+                      [matChipInputFor]="chipList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      [matChipInputAddOnBlur]="addOnBlur"
+                      (matChipInputTokenEnd)="add($event)"
+                    />
+                  </mat-chip-list>
+                </mat-form-field>
+              </p>
+            </div>
+            <div style="width: 45%">
+              <p>
+                <mat-form-field>
+                  <input
+                    class="matInput"
+                    type="text"
+                    matInput
+                    mask="separator.2"
+                    thousandSeparator=","
+                    placeholder="Quantity"
+                    formControlName="quantity"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && foodForm.get('quantity')?.errors
+                    }"
+                  />
+                </mat-form-field>
+                <span
+                  *ngIf="submitted && foodForm.get('quantity')?.errors"
+                  class="error"
+                >
+                  Quantity is required
+                </span>
+              </p>
+              <p>
+                <mat-form-field>
+                  <input
+                    class="matInput"
+                    matInput
+                    [min]="minDate"
+                    placeholder="Best Before use"
+                    [matDatepicker]="picker"
+                    formControlName="bestBefore"
+                    readonly="true"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && foodForm.get('bestBefore')?.errors
+                    }"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <span
+                  *ngIf="submitted && foodForm.get('bestBefore')?.errors"
+                  class="error"
+                >
+                  Best Before is required
+                </span>
+              </p>
+
+              <p>
+                <mat-form-field>
+                  <mat-select
+                    placeholder="Select extras"
+                    formControlName="extras"
+                    class="matInput"
+                    type="text"
+                    matInput
+                    [(value)]="selectedExtras"
+                    multiple
+                  >
+                    <mat-option *ngFor="let extra of extras" [value]="extra">{{
+                      extra.name
+                    }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field>
+                  <mat-label>Image</mat-label>
+                  <mat-toolbar style="background: unset; padding-left: 0px">
+                    <input
+                      style="padding-top: 24px"
+                      id="fileuploader"
+                      type="file"
+                      accept="image/*"
+                      (change)="onFileChange($event)"
+                    />
+                  </mat-toolbar>
+
+                  <input style="display: none" id="fileuploader" matInput />
+                  <img
+                    alt=""
+                    [src]="imageSrc"
+                    *ngIf="imageSrc"
+                    style="height: 200px; width: 250px"
+                  />
+                </mat-form-field>
+                <span
+                  *ngIf="
+                    (submitted && foodForm.get('image')?.errors) ||
+                    (submitted && !imageSrc)
+                  "
+                  class="error"
+                >
+                  Image is required
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="button">
+            <button
+              [routerLink]="'..'"
+              type="button"
+              mat-button
+              class="loginButton"
+              style="background: white; color: black; margin-right: 36px"
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              [disabled]="
+                (submitted && !foodForm.valid) || (submitted && !imageSrc)
+              "
+              mat-button
+              class="loginButton"
+            >
+              Publish
+            </button>
+          </div>
+        </form>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>

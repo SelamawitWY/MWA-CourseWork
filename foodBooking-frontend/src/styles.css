@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+  background: gray;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-snack-bar-container {
+  background: red !important;
+  color: white;
+  display: flex !important;
+  justify-content: center;
+
+  position: fixed;
+  top: 30px;
+  transform: translateX(-55%) !important;
+}
+
+app-header {
+  position: fixed;
+  z-index: 1;
+  width: 100vw;
+  height: 64px;
+  background: rgb(134, 152, 111);
+  background: linear-gradient(transparent, rgb(134, 152, 111));
+}
+app-footer {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  background: rgb(134, 152, 111);
+  color: rgb(41, 39, 49);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.loginButton[disabled],
+.actionButton[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}

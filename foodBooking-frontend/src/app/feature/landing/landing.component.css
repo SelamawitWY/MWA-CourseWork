@@ -1,0 +1,39 @@
+.loginButton {
+  width: 105px;
+  margin-right: 16px;
+  width: 105px;
+  background: whitesmoke;
+  color: black;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 16px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.header {
+  position: fixed;
+  z-index: 1;
+  width: 100vw;
+  height: 64px;
+  background: rgb(134, 152, 111, 0.75);
+  /* background: linear-gradient(tr 0.75ansparent, rgb(134, 152, 111,)); */
+}
+
+#container {
+  height: 100vh;
+  background-size: cover;
+}
+
+#sectionDiv {
+  position: fixed;
+  top: 215px;
+  left: 150px;
+  /* background: rgb(134, 152, 111, 0.75); */
+  background: rgb(41, 39, 49, 0.75);
+  /* 152, 129, 107 */
+  padding: 52px;
+  color: white;
+
+  border-radius: 36px;
+}

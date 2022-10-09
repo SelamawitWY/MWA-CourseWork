@@ -1,0 +1,21 @@
+<div class="header">
+  <div
+    style="
+      display: flex;
+      justify-content: space-between;
+      padding: 12px;
+      color: white;
+    "
+  >
+    <p style="font-size: 26px; padding-top: 9px">FOOD BOOKING</p>
+    <section>
+      <button mat-button class="loginButton noround" (click)="openProfile()">
+        <mat-icon>account_circle</mat-icon>
+        {{ username | titlecase }}
+      </button>
+      <button (click)="logout()" mat-button class="loginButton noround">
+        Sign Out
+      </button>
+    </section>
+  </div>
+</div>

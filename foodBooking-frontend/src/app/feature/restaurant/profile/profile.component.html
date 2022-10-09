@@ -1,0 +1,347 @@
+<div id="container">
+  <mat-card id="homePage">
+    <div style="display: flex; margin-bottom: 36px; margin-top: 36px">
+      <button
+        mat-button
+        [routerLink]="'/restaurants'"
+        class="loginButton noround"
+      >
+        Foods
+      </button>
+      <button
+        [routerLink]="'/restaurants/extras'"
+        mat-button
+        class="loginButton noround"
+      >
+        Extras
+      </button>
+      <button
+        [routerLink]="'/restaurants/orders'"
+        mat-button
+        class="loginButton noround"
+      >
+        Orders
+      </button>
+    </div>
+
+    <mat-card-title style="font-size: 54px; margin-bottom: 54px"
+      >Profile</mat-card-title
+    >
+    <mat-card-content>
+      <section>
+        <form
+          id="restForm"
+          [formGroup]="restSignupForm"
+          (ngSubmit)="editRestaurant()"
+        >
+          <div style="display: flex; justify-content: space-between">
+            <div style="width: 45%">
+              <mat-card-title
+                style="
+                  font-size: 24px;
+                  margin-bottom: 20px;
+                  margin-top: 32px;
+                  justify-content: left;
+                "
+                >Profile</mat-card-title
+              >
+              <p>
+                <mat-form-field>
+                  <input
+                    class="matInput"
+                    type="text"
+                    matInput
+                    placeholder="Restaurant Name"
+                    formControlName="name"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && restSignupForm.get('name')?.errors
+                    }"
+                  />
+                </mat-form-field>
+                <span
+                  *ngIf="submitted && restSignupForm.get('name')?.errors"
+                  class="error"
+                >
+                  Restaurant Name is required
+                </span>
+              </p>
+              <p>
+                <mat-form-field>
+                  <input
+                    class="matInput"
+                    type="text"
+                    matInput
+                    placeholder="Small Description"
+                    formControlName="description"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && restSignupForm.get('description')?.errors
+                    }"
+                  />
+                </mat-form-field>
+                <span
+                  *ngIf="submitted && restSignupForm.get('description')?.errors"
+                  class="error"
+                >
+                  Description is required
+                </span>
+              </p>
+
+              <p>
+                <mat-form-field>
+                  <input
+                    class="matInput"
+                    type="text"
+                    matInput
+                    mask="(000) 000-0000"
+                    placeholder="Phone number"
+                    formControlName="phonenumber"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && restSignupForm.get('phonenumber')?.errors
+                    }"
+                  />
+                </mat-form-field>
+                <span
+                  *ngIf="submitted && restSignupForm.get('phonenumber')?.errors"
+                  class="error"
+                >
+                  Phone number is required
+                </span>
+              </p>
+
+              <p>
+                <span style="display: flex">
+                  <mat-form-field style="min-width: 150px">
+                    <input
+                      placeholder="Working Hour From"
+                      matInput
+                      class="matInput"
+                      [ngxTimepicker]="fromPicker"
+                      formControlName="workinghourfrom"
+                      readonly="true"
+                      [ngClass]="{
+                        'is-invalid':
+                          submitted &&
+                          restSignupForm.get('workinghourfrom')?.errors
+                      }"
+                    />
+                    <ngx-material-timepicker
+                      #fromPicker
+                    ></ngx-material-timepicker>
+                  </mat-form-field>
+                  <mat-form-field style="min-width: 150px">
+                    <input
+                      placeholder="Working Hour To"
+                      matInput
+                      class="matInput"
+                      [ngxTimepicker]="picker"
+                      [value]="toPicker"
+                      formControlName="workinghourto"
+                      readonly="true"
+                      [ngClass]="{
+                        'is-invalid':
+                          submitted &&
+                          restSignupForm.get('workinghourto')?.errors
+                      }"
+                    />
+                    <ngx-material-timepicker #picker></ngx-material-timepicker>
+                  </mat-form-field>
+                </span>
+                <span
+                  *ngIf="
+                    submitted &&
+                    (
+                      restSignupForm.get('workinghourfrom') ||
+                      restSignupForm.get('workinghourto')
+                    )?.errors
+                  "
+                  class="error"
+                >
+                  Working hours is required
+                </span>
+              </p>
+            </div>
+            <div style="width: 45%">
+              <mat-card-title
+                style="
+                  font-size: 24px;
+                  margin-bottom: 26px;
+                  margin-top: 32px;
+                  justify-content: space-between;
+                "
+                >Address</mat-card-title
+              >
+              <p>
+                <mat-form-field>
+                  <input
+                    class="matInput"
+                    type="text"
+                    matInput
+                    placeholder="City"
+                    formControlName="city"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && restSignupForm.get('city')?.errors
+                    }"
+                  />
+                </mat-form-field>
+                <span
+                  *ngIf="submitted && restSignupForm.get('city')?.errors"
+                  class="error"
+                >
+                  City is required
+                </span>
+              </p>
+
+              <p>
+                <mat-form-field>
+                  <input
+                    class="matInput"
+                    type="text"
+                    matInput
+                    placeholder="State"
+                    formControlName="state"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && restSignupForm.get('state')?.errors
+                    }"
+                  />
+                </mat-form-field>
+                <span
+                  *ngIf="submitted && restSignupForm.get('state')?.errors"
+                  class="error"
+                >
+                  State is required
+                </span>
+              </p>
+
+              <p>
+                <mat-form-field>
+                  <input
+                    class="matInput"
+                    type="text"
+                    matInput
+                    placeholder="Country"
+                    formControlName="country"
+                    value="US"
+                    readonly="true"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && restSignupForm.get('country')?.errors
+                    }"
+                  />
+                </mat-form-field>
+                <span
+                  *ngIf="submitted && restSignupForm.get('country')?.errors"
+                  class="error"
+                >
+                  Country is required
+                </span>
+              </p>
+
+              <p>
+                <mat-form-field>
+                  <input
+                    class="matInput"
+                    type="text"
+                    matInput
+                    [value]="location"
+                    readonly="true"
+                    placeholder="Location"
+                    formControlName="location"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && restSignupForm.get('location')?.errors
+                    }"
+                  />
+                  <mat-icon
+                    style="cursor: pointer"
+                    matSuffix
+                    (click)="getLocation()"
+                    >location_on</mat-icon
+                  >
+                </mat-form-field>
+                <span
+                  *ngIf="submitted && restSignupForm.get('location')?.errors"
+                  class="error"
+                >
+                  Location is required
+                </span>
+              </p>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <mat-card-title
+              style="
+                font-size: 24px;
+                margin-bottom: 26px;
+                margin-top: 32px;
+                justify-content: left;
+              "
+              >Account</mat-card-title
+            >
+            <div style="display: flex; justify-content: space-between">
+              <p style="width: 45%">
+                <mat-form-field>
+                  <input
+                    class="matInput"
+                    matInput
+                    autocomplete="off"
+                    placeholder="Email"
+                    formControlName="email"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && restSignupForm.get('email')?.errors
+                    }"
+                  />
+                </mat-form-field>
+                <span
+                  *ngIf="submitted && restSignupForm.get('email')?.errors"
+                  class="error"
+                >
+                  Email is required
+                </span>
+              </p>
+
+              <p style="width: 45%">
+                <mat-form-field>
+                  <input
+                    class="matInput"
+                    type="password"
+                    autocomplete="off"
+                    matInput
+                    placeholder="Password"
+                    formControlName="password"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && restSignupForm.get('password')?.errors
+                    }"
+                  />
+                </mat-form-field>
+                <span
+                  *ngIf="submitted && restSignupForm.get('password')?.errors"
+                  class="error"
+                >
+                  Password length should be greater than 8 and less than 32
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="button">
+            <button
+              type="submit"
+              [disabled]="submitted && !restSignupForm.valid"
+              mat-button
+              class="loginButton"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>

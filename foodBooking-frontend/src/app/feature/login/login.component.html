@@ -1,0 +1,94 @@
+<div id="container">
+  <mat-card id="homePage" style="padding-top: 208px">
+    <mat-card-title style="font-size: 54px; margin-bottom: 54px"
+      >Book Food Online</mat-card-title
+    >
+    <mat-card-content>
+      <section>
+        <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="login()">
+          <p>
+            <mat-form-field>
+              <input
+                class="matInput"
+                type="text"
+                matInput
+                placeholder="Email"
+                formControlName="email"
+                [ngClass]="{
+                  'is-invalid': submitted && loginForm.get('email')?.errors
+                }"
+              />
+            </mat-form-field>
+            <span
+              *ngIf="submitted && loginForm.get('email')?.errors"
+              class="error"
+            >
+              Email is required
+            </span>
+          </p>
+
+          <p>
+            <mat-form-field>
+              <input
+                class="matInput"
+                type="password"
+                matInput
+                placeholder="Password"
+                formControlName="password"
+                autocomplete="off"
+                [ngClass]="{
+                  'is-invalid': submitted && loginForm.get('password')?.errors
+                }"
+              />
+            </mat-form-field>
+            <span
+              *ngIf="submitted && loginForm.get('password')?.errors"
+              class="error"
+            >
+              Password length should be greater than 8
+            </span>
+          </p>
+
+          <div class="button">
+            <button
+              type="submit"
+              [disabled]="(submitted && !loginForm.valid) || !this.lat"
+              mat-button
+              class="loginButton"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+
+        <mat-card-title
+          style="font-size: 32px; margin-bottom: 26px; margin-top: 32px"
+          >No account yet?</mat-card-title
+        >
+        <div class="button">
+          <button
+            type="button"
+            mat-button
+            [routerLink]="'../signup'"
+            class="loginButton"
+          >
+            Sign up for free
+          </button>
+        </div>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- template: `
+<h1>
+  login works!
+</h1>
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <input class="ml-6" placeholder="email" formControlName="email" />
+  <input placeholder="password" type="password" formControlName="password" />
+  <button type="submit" [disabled]="!loginForm.valid"> Login </button>
+</form>
+`,
+styles: [
+] -->

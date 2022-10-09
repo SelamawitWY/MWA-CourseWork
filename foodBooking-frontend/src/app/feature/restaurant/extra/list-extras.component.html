@@ -1,0 +1,87 @@
+<div id="container" style="background-repeat: unset">
+  <mat-card id="homePage">
+    <mat-card-content style="flex-direction: column">
+      <div style="display: flex">
+        <button
+          mat-button
+          [routerLink]="'/restaurants'"
+          class="loginButton noround"
+        >
+          Foods
+        </button>
+        <button
+          [routerLink]="'/restaurants/extras'"
+          mat-button
+          class="loginButton noround"
+          style="background: goldenrod"
+        >
+          Extras
+        </button>
+        <button
+          [routerLink]="'/restaurants/orders'"
+          mat-button
+          class="loginButton noround"
+        >
+          Orders
+        </button>
+      </div>
+
+      <section style="background: rgb(41, 39, 49, 0.9); border-radius: 16px">
+        <div class="addFoodButton">
+          <button
+            [routerLink]="'add'"
+            mat-button
+            class="loginButton noround"
+            style="width: 215px"
+          >
+            <mat-icon>add</mat-icon>
+            Add Extra
+          </button>
+        </div>
+
+        <div
+          id="restForm"
+          style="
+            height: 98vh;
+            padding-top: 6px;
+            overflow-x: hidden;
+            overflow-y: auto;
+          "
+        >
+          <mat-card *ngFor="let extra of extras" class="foodCard">
+            <div style="display: flex">
+              <div style="width: 70%; display: flex">
+                <section>
+                  <mat-card-header>
+                    <mat-card-title style="justify-content: left">{{
+                      extra.name
+                    }}</mat-card-title>
+                    <mat-card-subtitle>$ {{ extra.price }}</mat-card-subtitle>
+                  </mat-card-header>
+                  <img class="matImage" [src]="extra.imageUrl" alt="" />
+                </section>
+              </div>
+
+              <mat-card-actions class="actionDiv">
+                <button
+                  mat-button
+                  class="loginButton actionButton"
+                  (click)="edit(extra)"
+                >
+                  <mat-icon>edit</mat-icon> Edit
+                </button>
+                <button
+                  mat-button
+                  class="loginButton actionButton"
+                  (click)="delete(extra)"
+                >
+                  <mat-icon>delete</mat-icon>Delete
+                </button>
+              </mat-card-actions>
+            </div>
+          </mat-card>
+        </div>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>

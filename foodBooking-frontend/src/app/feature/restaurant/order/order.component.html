@@ -1,0 +1,109 @@
+<div id="container" style="background-repeat: unset">
+  <mat-card id="homePage">
+    <mat-card-content style="flex-direction: column">
+      <div style="display: flex">
+        <button
+          mat-button
+          [routerLink]="'/restaurants'"
+          class="loginButton noround"
+        >
+          Foods
+        </button>
+        <button
+          [routerLink]="'/restaurants/extras'"
+          mat-button
+          class="loginButton noround"
+        >
+          Extras
+        </button>
+        <button
+          [routerLink]="'/restaurants/orders'"
+          mat-button
+          class="loginButton noround"
+          style="background: goldenrod"
+        >
+          Orders
+        </button>
+      </div>
+
+      <section style="background: rgb(41, 39, 49, 0.9); border-radius: 16px">
+        <div
+          id="restForm"
+          style="
+            height: 98vh;
+            padding-top: 6px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 48px;
+          "
+        >
+          <mat-card *ngFor="let booking of bookings" class="foodCard">
+            <div style="display: flex; align-items: center">
+              <div style="width: 70%; display: flex; align-items: flex-end">
+                <section>
+                  <mat-card-header>
+                    <mat-card-title style="justify-content: left">{{
+                      booking.food.name
+                    }}</mat-card-title>
+                    <mat-card-subtitle>
+                      $ {{ getPrice(booking.totalPrice) }}</mat-card-subtitle
+                    >
+                  </mat-card-header>
+                  <img class="matImage" [src]="booking.food.imageUrl" alt="" />
+                </section>
+
+                <mat-card-content
+                  class="recipeDiv"
+                  style="
+                    flex-direction: column;
+                    align-items: baseline;
+                    min-width: max-content;
+                  "
+                >
+                  <p style="font-style: italic; margin: 0px">
+                    Customer Name : {{ booking.owner.fullName | titlecase }}
+                  </p>
+                  <p style="font-style: italic; margin: 0px">
+                    Phone Number : ({{ booking.owner.phoneNumber.slice(0, 3) }})
+                    {{ booking.owner.phoneNumber.slice(3, 6) }}-{{
+                      booking.owner.phoneNumber.slice(6, 10)
+                    }}
+                  </p>
+                  <mat-divider
+                    style="
+                      width: 100%;
+                      margin: 3px;
+                      background: rgb(133, 152, 111);
+                    "
+                  ></mat-divider>
+                  <p style="font-style: italic; margin: 0px">
+                    Quantity : {{ booking.quantity }}
+                  </p>
+                  <p style="font-style: italic; margin: 0px">
+                    Extras : {{ getExtras(booking.extras) }}
+                  </p>
+                  <p style="font-style: italic; margin: 0px">
+                    Status : {{ booking.status }}
+                  </p>
+                  <p style="font-style: italic; margin: 0px">
+                    Order Date : {{ booking.reservedDate | date: "MM, dd y" }}
+                  </p>
+                </mat-card-content>
+              </div>
+              <div id="restForm">
+                <button
+                  mat-button
+                  class="loginButton actionButton"
+                  [disabled]="booking.status != 'Pending'"
+                  (click)="completeOrder(booking)"
+                >
+                  Complete
+                </button>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>

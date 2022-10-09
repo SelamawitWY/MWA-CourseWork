@@ -1,0 +1,28 @@
+const mongoose = require("mongoose");
+
+const FoodSchema = mongoose.Schema({
+  name: String,
+  description: String,
+  price: Number,
+  imageUrl: String,
+  recipe: [
+    {
+      type: String,
+    },
+  ],
+  extras: [
+    {
+      _id: mongoose.Types.ObjectId,
+      name: String,
+      price: Number,
+      imageUrl: String,
+    },
+  ],
+  bestBeforeUse: Date,
+  totalQuantity: Number,
+  remainingQuantity: Number,
+  isAvailable: Boolean,
+  owner: { type: mongoose.Types.ObjectId, ref: "Restaurant" },
+});
+
+module.exports = mongoose.model("Food", FoodSchema);
